@@ -146,6 +146,7 @@ end
 ```
 
 ##### Additional resources
-*SymPy* and *NLsolve* are essentially symbolic math Julia packages. The [following documentation](https://mth229.github.io/symbolic.html) has more useful information regarding symbolic expressions.
+*SymPy* and *NLsolve* are essentially symbolic math Julia packages. The [following documentation](https://mth229.github.io/symbolic.html) has more useful information regarding symbolic expressions. It also provides a lot more information
+on solving equations with topics covering limits, differentiation, optimisation, and integration.
 
 ---

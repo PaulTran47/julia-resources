@@ -87,7 +87,7 @@ nsolve solution 1 is: 2.617866613066812769178978059143202817320274359410482
 919210508161040370325332
 nsolve solution 2 is: SymPy.Sym[0; 1.00000000000000000000000000000000000000
 0000000000000000000000000000000000000]
-Main.##WeaveSandBox#260.showcase_nsolve
+Main.##WeaveSandBox#262.showcase_nsolve
 ```
 
 
@@ -166,7 +166,7 @@ nlsolve solution is: Results of Nonlinear Solver Algorithm
    * |f(x)| < 1.0e-08: true
  * Function Calls (f): 5
  * Jacobian Calls (df/dx): 5
-Main.##WeaveSandBox#260.showcase_nlsolve
+Main.##WeaveSandBox#262.showcase_nlsolve
 ```
 
 
@@ -174,6 +174,7 @@ Main.##WeaveSandBox#260.showcase_nlsolve
 
 
 ##### Additional resources
-*SymPy* and *NLsolve* are essentially symbolic math Julia packages. The [following documentation](https://mth229.github.io/symbolic.html) has more useful information regarding symbolic expressions.
+*SymPy* and *NLsolve* are essentially symbolic math Julia packages. The [following documentation](https://mth229.github.io/symbolic.html) has more useful information regarding symbolic expressions. It also provides a lot more information
+on solving equations with topics covering limits, differentiation, optimisation, and integration.
 
 ---
