@@ -1,8 +1,9 @@
 ---
-title: Julia workflow with Julia scripts, Julia Markdown, and Weave
-author: Paul Le Tran
-date: 05 November, 2021
+author: "Paul Le Tran"
+title: "Julia workflow with Julia scripts, Julia Markdown, and Weave"
+date: "05 November, 2021"
 ---
+
 
 ## Overview
 With the current development of [Julia for VSCode](https://www.julia-vscode.org/), my default is to begin creating Julia scripts directly in a Julia Markdown (.jmd) file. This is because Julia for VSCode has
@@ -104,6 +105,16 @@ module part2a
 end
 ```
 
+```
+Unemployment rate in December 1982: 10.41
+Unemployment rate in December 1985: 6.96
+Main.##WeaveSandBox#257.part2a
+```
+
+
+
+
+
 ---
 
 ## LaTeX support in Weave
@@ -116,6 +127,17 @@ Julia Markdown also natively supports LaTeX, which is rendered as so:
 ```
 
 ---
+
+## Output
+Weave allows multiple [output formats](http://weavejl.mpastell.com/stable/usage/#Supported-Output-Formats). My personal default are to create HTML and Github Markdown output (the latter so it can be displayed in my
+[Github repository](https://github.com/PaulTran47/julia-resources)).
+
+```julia
+weave("jl_jmd_weave.jmd", doctype = "md2html")
+weave("jl_jmd_weave.jmd", doctype = "github")
+```
+
+
 
 ## Ending note
 That's it. This workflow is that simple to get up and running. Information about useful Julia packages and bridges between Matlab and Julia functions can be found in other .jmd files I plan to create.
