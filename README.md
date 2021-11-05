@@ -40,7 +40,7 @@ Julia Markdown file that describes my chosen workflow of Julia scripts + Julia M
 
 =========================================================================
 
-### [Julia-Matlab mappings](https://github.com/PaulTran47/julia-resources/tree/main/julia-matlab-mappings)
+### [Julia-Matlab mappings](https://github.com/PaulTran47/julia-resources/tree/main/julia_matlab_mappings)
 =========================================================================
 
 Julia Markdown file that documents Julia equivalents of useful Matlab functions.
