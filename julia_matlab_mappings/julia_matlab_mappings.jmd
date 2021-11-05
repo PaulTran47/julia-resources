@@ -19,6 +19,14 @@ describing the Matlab functions, then provide mappings to Julia.
 
 ---
 
+## [matlab-to-julia](https://lakras.github.io/matlab-to-julia/) translator
+Because the syntax between the two languages are quite similar, there isn't much uprooting that is needed to begin moving to Julia. The linked translator does a lot of the basic work of converting Matlab code into Julia scripts.
+
+NOTE: It should be mentioned that replacement of Matlab functions with Julia equivalents and proper usage of Julia functions and modules need to be done *manually* (e.g., Matlab "clear all; close all; clc" roughly translates to writing
+Julia scripts within modules). This translator is still immensely useful because majority of your Matlab code is able to be correctly converted.
+
+---
+
 ## [vpasolve](https://www.mathworks.com/help/symbolic/sym.vpasolve.html), [solve](https://www.mathworks.com/help/symbolic/solve.html)
 *vpasolve* is a Matlab function that solves equations numerically; *solve* is the analytical equivalent. Both can be applied to linear and nonlinear system of equations as well.
 
