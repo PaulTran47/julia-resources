@@ -1,8 +1,4 @@
----
-author: "Paul Le Tran"
-title: "Julia workflow with Julia scripts, Julia Markdown, and Weave"
-date: "05 November, 2021"
----
+
 
 
 ## Overview
@@ -108,7 +104,7 @@ end
 ```
 Unemployment rate in December 1982: 10.41
 Unemployment rate in December 1985: 6.96
-Main.##WeaveSandBox#257.part2a
+Main.##WeaveSandBox#262.part2a
 ```
 
 
@@ -129,12 +125,14 @@ Julia Markdown also natively supports LaTeX, which is rendered as so:
 ---
 
 ## Output
-Weave allows multiple [output formats](http://weavejl.mpastell.com/stable/usage/#Supported-Output-Formats). My personal default are to create HTML and Github Markdown output (the latter so it can be displayed in my
+Weave allows multiple [output formats](http://weavejl.mpastell.com/stable/usage/#Supported-Output-Formats). My personal default are to create HTML and GitHub Markdown output (the latter so it can be displayed in my
 [Github repository](https://github.com/PaulTran47/julia-resources)).
 
 ```julia
 weave("jl_jmd_weave.jmd", doctype = "md2html")
 weave("jl_jmd_weave.jmd", doctype = "github")
+# Renaming GitHub Markdown output so it can be displayed properly on GitHub.
+convert_doc("jl_jmd_weave.md", "README.md")
 ```
 
 

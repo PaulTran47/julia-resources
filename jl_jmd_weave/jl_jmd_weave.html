@@ -771,7 +771,7 @@ END NOTE =#</span><span class='hljl-t'>
 <pre class="output">
 Unemployment rate in December 1982: 10.41
 Unemployment rate in December 1985: 6.96
-Main.##WeaveSandBox#258.part2a
+Main.##WeaveSandBox#261.part2a
 </pre>
 
 
@@ -785,12 +785,14 @@ Main.##WeaveSandBox#258.part2a
 \]</p>
 <hr />
 <h2>Output</h2>
-<p>Weave allows multiple <a href="http://weavejl.mpastell.com/stable/usage/#Supported-Output-Formats">output formats</a>. My personal default are to create HTML and Github Markdown output &#40;the latter so it can be displayed in my <a href="https://github.com/PaulTran47/julia-resources">Github repository</a>&#41;.</p>
+<p>Weave allows multiple <a href="http://weavejl.mpastell.com/stable/usage/#Supported-Output-Formats">output formats</a>. My personal default are to create HTML and GitHub Markdown output &#40;the latter so it can be displayed in my <a href="https://github.com/PaulTran47/julia-resources">Github repository</a>&#41;.</p>
 
 
 <pre class='hljl'>
 <span class='hljl-nf'>weave</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;jl_jmd_weave.jmd&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>doctype</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;md2html&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
-</span><span class='hljl-nf'>weave</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;jl_jmd_weave.jmd&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>doctype</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;github&quot;</span><span class='hljl-p'>)</span>
+</span><span class='hljl-nf'>weave</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;jl_jmd_weave.jmd&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>doctype</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;github&quot;</span><span class='hljl-p'>)</span><span class='hljl-t'>
+</span><span class='hljl-cs'># Renaming GitHub Markdown output so it can be displayed properly on GitHub.</span><span class='hljl-t'>
+</span><span class='hljl-nf'>convert_doc</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;jl_jmd_weave.md&quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;README.md&quot;</span><span class='hljl-p'>)</span>
 </pre>
 
 

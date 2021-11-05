@@ -118,12 +118,14 @@ Julia Markdown also natively supports LaTeX, which is rendered as so:
 ---
 
 ## Output
-Weave allows multiple [output formats](http://weavejl.mpastell.com/stable/usage/#Supported-Output-Formats). My personal default are to create HTML and Github Markdown output (the latter so it can be displayed in my
+Weave allows multiple [output formats](http://weavejl.mpastell.com/stable/usage/#Supported-Output-Formats). My personal default are to create HTML and GitHub Markdown output (the latter so it can be displayed in my
 [Github repository](https://github.com/PaulTran47/julia-resources)).
 
 ```julia; eval = false
 weave("jl_jmd_weave.jmd", doctype = "md2html")
 weave("jl_jmd_weave.jmd", doctype = "github")
+# Renaming GitHub Markdown output so it can be displayed properly on GitHub.
+convert_doc("jl_jmd_weave.md", "README.md")
 ```
 
 ## Ending note

@@ -1,8 +1,4 @@
----
-author: "Paul Le Tran"
-title: "Mappings between Julia and Matlab"
-date: "05 November, 2021"
----
+
 
 
 ## Overview
