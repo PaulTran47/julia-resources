@@ -32,7 +32,7 @@ This repository houses documentation on useful Julia resources from an economics
 ### [Julia workflow](https://github.com/PaulTran47/julia-resources/tree/main/jl_jmd_weave)
 =========================================================================
 
-Julia Markdown file that describes my chosen workflow of Julia scripts + Julia Markdown + Weave
+Julia Markdown file that describes my chosen workflow of Julia scripts + Julia Markdown + Weave.
 
 <p align="right">
   (<a href="#julia-resources">back to top.</a>)
