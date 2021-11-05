@@ -16,6 +16,12 @@ describing the Matlab functions, then provide mappings to Julia.
 
 ---
 
+## Differences between Julia and Matlab
+Before understanding mappings between the two languages, it's helpful to know the noteworthy differences first. The Julia documentation has a perfect summary for some
+[noteworthy differences](https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-MATLAB) between the languages.
+
+---
+
 ## [matlab-to-julia](https://lakras.github.io/matlab-to-julia/) translator
 Because the syntax between the two languages are quite similar, there isn't much uprooting that is needed to begin moving to Julia. The linked translator does a lot of the basic work of converting Matlab code into Julia scripts.
 
@@ -87,7 +93,7 @@ nsolve solution 1 is: 2.617866613066812769178978059143202817320274359410482
 919210508161040370325332
 nsolve solution 2 is: SymPy.Sym[0; 1.00000000000000000000000000000000000000
 0000000000000000000000000000000000000]
-Main.##WeaveSandBox#262.showcase_nsolve
+Main.##WeaveSandBox#258.showcase_nsolve
 ```
 
 
@@ -166,7 +172,7 @@ nlsolve solution is: Results of Nonlinear Solver Algorithm
    * |f(x)| < 1.0e-08: true
  * Function Calls (f): 5
  * Jacobian Calls (df/dx): 5
-Main.##WeaveSandBox#262.showcase_nlsolve
+Main.##WeaveSandBox#258.showcase_nlsolve
 ```
 
 

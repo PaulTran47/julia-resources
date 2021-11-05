@@ -19,6 +19,12 @@ describing the Matlab functions, then provide mappings to Julia.
 
 ---
 
+## Differences between Julia and Matlab
+Before understanding mappings between the two languages, it's helpful to know the noteworthy differences first. The Julia documentation has a perfect summary for some
+[noteworthy differences](https://docs.julialang.org/en/v1/manual/noteworthy-differences/#Noteworthy-differences-from-MATLAB) between the languages.
+
+---
+
 ## [matlab-to-julia](https://lakras.github.io/matlab-to-julia/) translator
 Because the syntax between the two languages are quite similar, there isn't much uprooting that is needed to begin moving to Julia. The linked translator does a lot of the basic work of converting Matlab code into Julia scripts.
 
