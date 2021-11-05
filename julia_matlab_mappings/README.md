@@ -173,4 +173,7 @@ Main.##WeaveSandBox#260.showcase_nlsolve
 
 
 
+##### Additional resources
+*SymPy* and *NLsolve* are essentially symbolic math Julia packages. The [following documentation](https://mth229.github.io/symbolic.html) has more useful information regarding symbolic expressions.
+
 ---
