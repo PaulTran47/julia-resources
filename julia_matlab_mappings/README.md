@@ -10,7 +10,7 @@ describing the Matlab functions, then provide mappings to Julia.
 ## Prerequisites
 * Having [VSCode](https://code.visualstudio.com/) installed;
 * Having [Matlab](https://www.mathworks.com/products/matlab.html) installed;
-    * Because Matlab is a propriety language behind a paywall, having [Octave](https://www.gnu.org/software/octave/index) installed is an free and open-source alternative with extremely similar syntax.
+    * Because Matlab is a proprietary language behind a paywall, having [Octave](https://www.gnu.org/software/octave/index) installed is an free and open-source alternative with extremely similar syntax.
 * Having the [Julia for VSCode](https://www.julia-vscode.org/) VSCode extension installed.
 * Having [Weave](https://github.com/JunoLab/Weave.jl) installed using Julia's package manager, [Pkg](https://github.com/JuliaLang/Pkg.jl).
 
@@ -87,7 +87,7 @@ nsolve solution 1 is: 2.617866613066812769178978059143202817320274359410482
 919210508161040370325332
 nsolve solution 2 is: SymPy.Sym[0; 1.00000000000000000000000000000000000000
 0000000000000000000000000000000000000]
-Main.##WeaveSandBox#258.showcase_nsolve
+Main.##WeaveSandBox#260.showcase_nsolve
 ```
 
 
@@ -166,7 +166,7 @@ nlsolve solution is: Results of Nonlinear Solver Algorithm
    * |f(x)| < 1.0e-08: true
  * Function Calls (f): 5
  * Jacobian Calls (df/dx): 5
-Main.##WeaveSandBox#258.showcase_nlsolve
+Main.##WeaveSandBox#260.showcase_nlsolve
 ```
 
 

@@ -13,7 +13,7 @@ describing the Matlab functions, then provide mappings to Julia.
 ## Prerequisites
 * Having [VSCode](https://code.visualstudio.com/) installed;
 * Having [Matlab](https://www.mathworks.com/products/matlab.html) installed;
-    * Because Matlab is a propriety language behind a paywall, having [Octave](https://www.gnu.org/software/octave/index) installed is an free and open-source alternative with extremely similar syntax.
+    * Because Matlab is a proprietary language behind a paywall, having [Octave](https://www.gnu.org/software/octave/index) installed is an free and open-source alternative with extremely similar syntax.
 * Having the [Julia for VSCode](https://www.julia-vscode.org/) VSCode extension installed.
 * Having [Weave](https://github.com/JunoLab/Weave.jl) installed using Julia's package manager, [Pkg](https://github.com/JuliaLang/Pkg.jl).
 
