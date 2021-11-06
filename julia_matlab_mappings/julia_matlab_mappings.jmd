@@ -5,8 +5,7 @@ date: 05 November, 2021
 ---
 
 ## Overview
-This .jmd file serves as a single source and complilation of all useful mappings between Matlab and Julia functions from an economics perspective. Each section will be the name of the Matlab function(s). The immediate text below will be
-describing the Matlab functions, then provide mappings to Julia.
+This .jmd file serves as a single source and complilation of all useful mappings between Matlab and Julia functions from an economics perspective. Each section will be the name of the Matlab function(s). The immediate text below will be describing the Matlab functions, then provide mappings to Julia.
 
 ---
 
@@ -28,8 +27,52 @@ Before understanding mappings between the two languages, it's helpful to know th
 ## [matlab-to-julia](https://lakras.github.io/matlab-to-julia/) translator
 Because the syntax between the two languages are quite similar, there isn't much uprooting that is needed to begin moving to Julia. The linked translator does a lot of the basic work of converting Matlab code into Julia scripts.
 
-NOTE: It should be mentioned that replacement of Matlab functions with Julia equivalents and proper usage of Julia functions and modules need to be done *manually* (e.g., Matlab "clear all; close all; clc" roughly translates to writing
-Julia scripts within modules). This translator is still immensely useful because majority of your Matlab code is able to be correctly converted.
+NOTE: It should be mentioned that replacement of Matlab functions with Julia equivalents and proper usage of Julia functions and modules need to be done *manually* (e.g., Matlab's "clear all; close all; clc"). This translator is still immensely useful because majority of your Matlab code is able to be correctly converted.
+
+---
+
+## [clear all](https://www.mathworks.com/help/matlab/ref/clear.html); [close all](https://www.mathworks.com/help/matlab/ref/close.html); [clc](https://www.mathworks.com/help/matlab/ref/clc.html)
+clear all; close all; clc is common Matlab practice of removing old workspace variables and output before a new project is started.
+
+A combination of Julia coding style, functions, and VSCode functionality can achieve these Matlab functions:
+
+* **clc**: Create a function that runs the the appropriate shell command for either Unix or Windows:
+```julia
+# Creating clc function
+function clc()
+  #= 
+    Clearing console
+  =#
+  # For Windows
+  Base.run(`cmd /c cls`)
+  # For Unix
+  # Base.run(`clear`)
+end
+
+# Calling clc function
+clc()
+```
+
+* **clear all (Module method)**: Write Julia scripts within modules.
+    * This results in all variables inside the module to be cleared upon each the .jl/.jmd file in the REPL. This coding style also clears functions too!
+
+* **clear all; clc (VSCode command palette method)**: Stopping ("Alt + J", "Alt + K" in VSCode command palette) and restarting ("Alt + J", "Alt + O" in VSCode command palette) the Julia REPL. This will clear the entire Julia workspace.
+
+* **close all**: VSCode command palette has the option "Julia: Delete All Plots" ("Shift + Delete" in VSCode command palette).
+
+**NOTE**: Unlike Matlab, once a variable is declared in the main workspace, it stays there forever (until the REPL is closed, at least). Julia's excellent memory management makes this not an issue. As as a result,it's common practice to just overwrite variables if used more than once in a script not using modules, or within the same module. If memory usage becomes a concern within a .jmd/.jl file, you can simply set the variable(s) equal to "nothing". The memory will be released the next time garbage collection runs (which can be forced by running the command "GC.gc()").
+
+### Best practice to emulate Matlab's clear all; close all; clc
+1. Include clc() function at the top of every .jl/.jmd file.
+
+2. Excluding variables or packages that are expected to be used in the entire programme, put all Julia scripts within modules.
+    * Alternative is to write Julia functions instead of scripts.
+
+3. Using VSCode's command palette, stop and restart Julia's REPL and delete all plots before every rerun of the .jl/.jmd file.
+
+4. Set variables no longer needed to be seen or used to "nothing" for garbage collection.
+
+5. Tell computer to run garage collector at the end of every .jl/.jmd file.
 
 ---
 
@@ -68,10 +111,26 @@ END NOTE =#
  included) will be overwritten.
 END NOTE =#
 
+# Creating clc function
+function clc()
+  #= 
+    Clearing console
+  =#
+  # For Windows
+  Base.run(`cmd /c cls`)
+  # For Unix
+  # Base.run(`clear`)
+end
+
+# Calling clc function
+clc()
+
+# Declaring commonly used packages
+using Weave
+using Logging
+
 module showcase_nsolve
-  # Declaring used packages
-  using Weave
-  using Logging
+  # Declaring used packages within module
   using SymPy
 
   # Showcasing nsolve for 1 equation
@@ -80,6 +139,7 @@ module showcase_nsolve
   soln_1 = nsolve(f, x, 3)
   @info "nsolve solution 1 is:" soln_1
   println("nsolve solution 1 is: ", soln_1)
+  f = x = soln_1 = nothing
 
   # Showcasing nsolve for system of equations (2)
   @vars x y
@@ -88,7 +148,11 @@ module showcase_nsolve
   soln_2 = sympy.nsolve([eq1, eq2], (x,y), (1,1))
   @info "nsolve solution 2 is:" soln_2
   println("nsolve solution 2 is: ", soln_2)
+  eq1 = eq2 = x = y = soln_2 = nothing
 end
+
+# Running garbage collector
+GC.gc()
 ```
 
 #### NLsolve
@@ -118,10 +182,26 @@ END NOTE =#
  included) will be overwritten.
 END NOTE =#
 
+# Creating clc function
+function clc()
+  #= 
+    Clearing console
+  =#
+  # For Windows
+  Base.run(`cmd /c cls`)
+  # For Unix
+  # Base.run(`clear`)
+end
+
+# Calling clc function
+clc()
+
+# Declaring commonly used packages
+using Weave
+using Logging
+
 module showcase_nlsolve
-  # Declaring used packages
-  using Weave
-  using Logging
+  # Declaring used packages within module
   using NLsolve
 
   #=
@@ -145,14 +225,17 @@ module showcase_nlsolve
   end
 
   # Showcasing nlsolve
-  soln = nlsolve(f!, j!, [ 0.1; 1.2])
+  soln = nlsolve(f!, j!, [0.1; 1.2])
   @info "nlsolve solution is:" soln
   println("nlsolve solution is: ", soln)
+  soln = nothing
 end
+
+# Running garbage collector
+GC.gc()
 ```
 
 ##### Additional resources
-*SymPy* and *NLsolve* are essentially symbolic math Julia packages. The [following documentation](https://mth229.github.io/symbolic.html) has more useful information regarding symbolic expressions. It also provides a lot more information
-on solving equations with topics covering limits, differentiation, optimisation, and integration.
+*SymPy* and *NLsolve* are essentially symbolic math Julia packages. The [following documentation](https://mth229.github.io/symbolic.html) has more useful information regarding symbolic expressions. It also provides a lot more information on solving equations with topics covering limits, differentiation, optimisation, and integration.
 
 ---

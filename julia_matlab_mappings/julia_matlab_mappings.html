@@ -682,7 +682,69 @@ div.title {text-align: center;}
 <hr />
 <h2><a href="https://lakras.github.io/matlab-to-julia/">matlab-to-julia</a> translator</h2>
 <p>Because the syntax between the two languages are quite similar, there isn&#39;t much uprooting that is needed to begin moving to Julia. The linked translator does a lot of the basic work of converting Matlab code into Julia scripts.</p>
-<p>NOTE: It should be mentioned that replacement of Matlab functions with Julia equivalents and proper usage of Julia functions and modules need to be done <em>manually</em> &#40;e.g., Matlab &quot;clear all; close all; clc&quot; roughly translates to writing Julia scripts within modules&#41;. This translator is still immensely useful because majority of your Matlab code is able to be correctly converted.</p>
+<p>NOTE: It should be mentioned that replacement of Matlab functions with Julia equivalents and proper usage of Julia functions and modules need to be done <em>manually</em> &#40;e.g., Matlab&#39;s &quot;clear all; close all; clc&quot;&#41;. This translator is still immensely useful because majority of your Matlab code is able to be correctly converted.</p>
+<hr />
+<h2><a href="https://www.mathworks.com/help/matlab/ref/clear.html">clear all</a>; <a href="https://www.mathworks.com/help/matlab/ref/close.html">close all</a>; <a href="https://www.mathworks.com/help/matlab/ref/clc.html">clc</a></h2>
+<p>clear all; close all; clc is common Matlab practice of removing old workspace variables and output before a new project is started.</p>
+<p>A combination of Julia coding style, functions, and VSCode functionality can achieve these Matlab functions:</p>
+<ul>
+<li><p><strong>clc</strong>: Create a function that runs the the appropriate shell command for either Unix or Windows:</p>
+</li>
+</ul>
+
+
+<pre class='hljl'>
+<span class='hljl-cs'># Creating clc function</span><span class='hljl-t'>
+</span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span><span class='hljl-t'>
+  </span><span class='hljl-cm'>#= 
+    Clearing console
+  =#</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Windows</span><span class='hljl-t'>
+  </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.</span><span class='hljl-nf'>run</span><span class='hljl-p'>(</span><span class='hljl-sb'>`cmd /c cls`</span><span class='hljl-p'>)</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Unix</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># Base.run(`clear`)</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Calling clc function</span><span class='hljl-t'>
+</span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span>
+</pre>
+
+
+<pre class="output">
+Process&#40;&#96;cmd /c cls&#96;, ProcessExited&#40;0&#41;&#41;
+</pre>
+
+
+<ul>
+<li><p><strong>clear all &#40;Module method&#41;</strong>: Write Julia scripts within modules.</p>
+<ul>
+<li><p>This results in all variables inside the module to be cleared upon each the .jl/.jmd file in the REPL. This coding style also clears functions too&#33;</p>
+</li>
+</ul>
+</li>
+<li><p><strong>clear all; clc &#40;VSCode command palette method&#41;</strong>: Stopping &#40;&quot;Alt &#43; J&quot;, &quot;Alt &#43; K&quot; in VSCode command palette&#41; and restarting &#40;&quot;Alt &#43; J&quot;, &quot;Alt &#43; O&quot; in VSCode command palette&#41; the Julia REPL. This will clear the entire Julia workspace.</p>
+</li>
+<li><p><strong>close all</strong>: VSCode command palette has the option &quot;Julia: Delete All Plots&quot; &#40;&quot;Shift &#43; Delete&quot; in VSCode command palette&#41;.</p>
+</li>
+</ul>
+<p><strong>NOTE</strong>: Unlike Matlab, once a variable is declared in the main workspace, it stays there forever &#40;until the REPL is closed, at least&#41;. Julia&#39;s excellent memory management makes this not an issue. As as a result,it&#39;s common practice to just overwrite variables if used more than once in a script not using modules, or within the same module. If memory usage becomes a concern within a .jmd/.jl file, you can simply set the variable&#40;s&#41; equal to &quot;nothing&quot;. The memory will be released the next time garbage collection runs &#40;which can be forced by running the command &quot;GC.gc&#40;&#41;&quot;&#41;.</p>
+<h3>Best practice to emulate Matlab&#39;s clear all; close all; clc</h3>
+<ol>
+<li><p>Include clc&#40;&#41; function at the top of every .jl/.jmd file.</p>
+</li>
+<li><p>Excluding variables or packages that are expected to be used in the entire programme, put all Julia scripts within modules.</p>
+<ul>
+<li><p>Alternative is to write Julia functions instead of scripts.</p>
+</li>
+</ul>
+</li>
+<li><p>Using VSCode&#39;s command palette, stop and restart Julia&#39;s REPL and delete all plots before every rerun of the .jl/.jmd file.</p>
+</li>
+<li><p>Set variables no longer needed to be seen or used to &quot;nothing&quot; for garbage collection.</p>
+</li>
+<li><p>Tell computer to run garage collector at the end of every .jl/.jmd file.</p>
+</li>
+</ol>
 <hr />
 <h2><a href="https://www.mathworks.com/help/symbolic/sym.vpasolve.html">vpasolve</a>, <a href="https://www.mathworks.com/help/symbolic/solve.html">solve</a></h2>
 <p><em>vpasolve</em> is a Matlab function that solves equations numerically; <em>solve</em> is the analytical equivalent. Both can be applied to linear and nonlinear system of equations as well.</p>
@@ -722,10 +784,26 @@ END NOTE =#</span><span class='hljl-t'>
  included) will be overwritten.
 END NOTE =#</span><span class='hljl-t'>
 
+</span><span class='hljl-cs'># Creating clc function</span><span class='hljl-t'>
+</span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span><span class='hljl-t'>
+  </span><span class='hljl-cm'>#= 
+    Clearing console
+  =#</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Windows</span><span class='hljl-t'>
+  </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.</span><span class='hljl-nf'>run</span><span class='hljl-p'>(</span><span class='hljl-sb'>`cmd /c cls`</span><span class='hljl-p'>)</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Unix</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># Base.run(`clear`)</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Calling clc function</span><span class='hljl-t'>
+</span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Declaring commonly used packages</span><span class='hljl-t'>
+</span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Weave</span><span class='hljl-t'>
+</span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Logging</span><span class='hljl-t'>
+
 </span><span class='hljl-k'>module</span><span class='hljl-t'> </span><span class='hljl-n'>showcase_nsolve</span><span class='hljl-t'>
-  </span><span class='hljl-cs'># Declaring used packages</span><span class='hljl-t'>
-  </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Weave</span><span class='hljl-t'>
-  </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Logging</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># Declaring used packages within module</span><span class='hljl-t'>
   </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>SymPy</span><span class='hljl-t'>
 
   </span><span class='hljl-cs'># Showcasing nsolve for 1 equation</span><span class='hljl-t'>
@@ -734,6 +812,7 @@ END NOTE =#</span><span class='hljl-t'>
   </span><span class='hljl-n'>soln_1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>nsolve</span><span class='hljl-p'>(</span><span class='hljl-n'>f</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-ni'>3</span><span class='hljl-p'>)</span><span class='hljl-t'>
   </span><span class='hljl-nd'>@info</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;nsolve solution 1 is:&quot;</span><span class='hljl-t'> </span><span class='hljl-n'>soln_1</span><span class='hljl-t'>
   </span><span class='hljl-nf'>println</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;nsolve solution 1 is: &quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>soln_1</span><span class='hljl-p'>)</span><span class='hljl-t'>
+  </span><span class='hljl-n'>f</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>soln_1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>nothing</span><span class='hljl-t'>
 
   </span><span class='hljl-cs'># Showcasing nsolve for system of equations (2)</span><span class='hljl-t'>
   </span><span class='hljl-nd'>@vars</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-t'>
@@ -742,16 +821,19 @@ END NOTE =#</span><span class='hljl-t'>
   </span><span class='hljl-n'>soln_2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>sympy</span><span class='hljl-oB'>.</span><span class='hljl-nf'>nsolve</span><span class='hljl-p'>([</span><span class='hljl-n'>eq1</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>eq2</span><span class='hljl-p'>],</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-n'>x</span><span class='hljl-p'>,</span><span class='hljl-n'>y</span><span class='hljl-p'>),</span><span class='hljl-t'> </span><span class='hljl-p'>(</span><span class='hljl-ni'>1</span><span class='hljl-p'>,</span><span class='hljl-ni'>1</span><span class='hljl-p'>))</span><span class='hljl-t'>
   </span><span class='hljl-nd'>@info</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;nsolve solution 2 is:&quot;</span><span class='hljl-t'> </span><span class='hljl-n'>soln_2</span><span class='hljl-t'>
   </span><span class='hljl-nf'>println</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;nsolve solution 2 is: &quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>soln_2</span><span class='hljl-p'>)</span><span class='hljl-t'>
-</span><span class='hljl-k'>end</span>
+  </span><span class='hljl-n'>eq1</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>eq2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>x</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>y</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>soln_2</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>nothing</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Running garbage collector</span><span class='hljl-t'>
+</span><span class='hljl-n'>GC</span><span class='hljl-oB'>.</span><span class='hljl-nf'>gc</span><span class='hljl-p'>()</span>
 </pre>
 
 
 <pre class="output">
-nsolve solution 1 is: 2.617866613066812769178978059143202817320274359410482
-919210508161040370325332
+nsolve solution 1 is: 2.61786661306681276917897805914320281732027435941048
+2919210508161040370325332
 nsolve solution 2 is: SymPy.Sym&#91;0; 1.00000000000000000000000000000000000000
 0000000000000000000000000000000000000&#93;
-Main.##WeaveSandBox#257.showcase_nsolve
 </pre>
 
 
@@ -783,10 +865,26 @@ END NOTE =#</span><span class='hljl-t'>
  included) will be overwritten.
 END NOTE =#</span><span class='hljl-t'>
 
+</span><span class='hljl-cs'># Creating clc function</span><span class='hljl-t'>
+</span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span><span class='hljl-t'>
+  </span><span class='hljl-cm'>#= 
+    Clearing console
+  =#</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Windows</span><span class='hljl-t'>
+  </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.</span><span class='hljl-nf'>run</span><span class='hljl-p'>(</span><span class='hljl-sb'>`cmd /c cls`</span><span class='hljl-p'>)</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Unix</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># Base.run(`clear`)</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Calling clc function</span><span class='hljl-t'>
+</span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Declaring commonly used packages</span><span class='hljl-t'>
+</span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Weave</span><span class='hljl-t'>
+</span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Logging</span><span class='hljl-t'>
+
 </span><span class='hljl-k'>module</span><span class='hljl-t'> </span><span class='hljl-n'>showcase_nlsolve</span><span class='hljl-t'>
-  </span><span class='hljl-cs'># Declaring used packages</span><span class='hljl-t'>
-  </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Weave</span><span class='hljl-t'>
-  </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Logging</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># Declaring used packages within module</span><span class='hljl-t'>
   </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>NLsolve</span><span class='hljl-t'>
 
   </span><span class='hljl-cm'>#=
@@ -810,10 +908,14 @@ END NOTE =#</span><span class='hljl-t'>
   </span><span class='hljl-k'>end</span><span class='hljl-t'>
 
   </span><span class='hljl-cs'># Showcasing nlsolve</span><span class='hljl-t'>
-  </span><span class='hljl-n'>soln</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>nlsolve</span><span class='hljl-p'>(</span><span class='hljl-n'>f!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>j!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-t'> </span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.2</span><span class='hljl-p'>])</span><span class='hljl-t'>
+  </span><span class='hljl-n'>soln</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>nlsolve</span><span class='hljl-p'>(</span><span class='hljl-n'>f!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>j!</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-p'>[</span><span class='hljl-nfB'>0.1</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-nfB'>1.2</span><span class='hljl-p'>])</span><span class='hljl-t'>
   </span><span class='hljl-nd'>@info</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;nlsolve solution is:&quot;</span><span class='hljl-t'> </span><span class='hljl-n'>soln</span><span class='hljl-t'>
   </span><span class='hljl-nf'>println</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;nlsolve solution is: &quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-n'>soln</span><span class='hljl-p'>)</span><span class='hljl-t'>
-</span><span class='hljl-k'>end</span>
+  </span><span class='hljl-n'>soln</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-n'>nothing</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Running garbage collector</span><span class='hljl-t'>
+</span><span class='hljl-n'>GC</span><span class='hljl-oB'>.</span><span class='hljl-nf'>gc</span><span class='hljl-p'>()</span>
 </pre>
 
 
@@ -829,7 +931,6 @@ nlsolve solution is: Results of Nonlinear Solver Algorithm
    * |f&#40;x&#41;| &lt; 1.0e-08: true
  * Function Calls &#40;f&#41;: 5
  * Jacobian Calls &#40;df/dx&#41;: 5
-Main.##WeaveSandBox#257.showcase_nlsolve
 </pre>
 
 
@@ -842,7 +943,7 @@ Main.##WeaveSandBox#257.showcase_nlsolve
         <div class="footer">
           <p>
             Published from <a href="julia_matlab_mappings.jmd">julia_matlab_mappings.jmd</a>
-            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.10 on 2021-11-05.
+            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.10 on 2021-11-06.
           </p>
         </div>
       </div>

@@ -730,7 +730,21 @@ END NOTE =#</span><span class='hljl-t'>
  Then, each time the script is ran, the output made by the module (variables
  included) will be overwritten.
 END NOTE =#</span><span class='hljl-t'>
-  
+
+</span><span class='hljl-cs'># Creating clc function</span><span class='hljl-t'>
+</span><span class='hljl-k'>function</span><span class='hljl-t'> </span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span><span class='hljl-t'>
+  </span><span class='hljl-cm'>#= 
+    Clearing console
+  =#</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Windows</span><span class='hljl-t'>
+  </span><span class='hljl-n'>Base</span><span class='hljl-oB'>.</span><span class='hljl-nf'>run</span><span class='hljl-p'>(</span><span class='hljl-sb'>`cmd /c cls`</span><span class='hljl-p'>)</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># For Unix</span><span class='hljl-t'>
+  </span><span class='hljl-cs'># Base.run(`clear`)</span><span class='hljl-t'>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Calling clc function</span><span class='hljl-t'>
+</span><span class='hljl-nf'>clc</span><span class='hljl-p'>()</span><span class='hljl-t'>
+
 </span><span class='hljl-cs'># Declaring used packages</span><span class='hljl-t'>
 </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Weave</span><span class='hljl-t'>
 </span><span class='hljl-k'>using</span><span class='hljl-t'> </span><span class='hljl-n'>Logging</span><span class='hljl-t'>
@@ -764,14 +778,16 @@ END NOTE =#</span><span class='hljl-t'>
   </span><span class='hljl-nd'>@info</span><span class='hljl-t'> </span><span class='hljl-s'>&quot;Printing to console: Unemployment rate in December 1985:&quot;</span><span class='hljl-t'> </span><span class='hljl-nf'>round</span><span class='hljl-p'>(</span><span class='hljl-ni'>100</span><span class='hljl-oB'>*</span><span class='hljl-n'>u_dec85</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>digits</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>)</span><span class='hljl-t'>
   </span><span class='hljl-nf'>println</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;Unemployment rate in December 1982: &quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>round</span><span class='hljl-p'>(</span><span class='hljl-ni'>100</span><span class='hljl-oB'>*</span><span class='hljl-n'>u_dec82</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>digits</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>))</span><span class='hljl-t'>
   </span><span class='hljl-nf'>println</span><span class='hljl-p'>(</span><span class='hljl-s'>&quot;Unemployment rate in December 1985: &quot;</span><span class='hljl-p'>,</span><span class='hljl-t'> </span><span class='hljl-nf'>round</span><span class='hljl-p'>(</span><span class='hljl-ni'>100</span><span class='hljl-oB'>*</span><span class='hljl-n'>u_dec85</span><span class='hljl-p'>;</span><span class='hljl-t'> </span><span class='hljl-n'>digits</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-ni'>2</span><span class='hljl-p'>))</span><span class='hljl-t'>
-</span><span class='hljl-k'>end</span>
+</span><span class='hljl-k'>end</span><span class='hljl-t'>
+
+</span><span class='hljl-cs'># Running garbage collector</span><span class='hljl-t'>
+</span><span class='hljl-n'>GC</span><span class='hljl-oB'>.</span><span class='hljl-nf'>gc</span><span class='hljl-p'>()</span>
 </pre>
 
 
 <pre class="output">
 Unemployment rate in December 1982: 10.41
 Unemployment rate in December 1985: 6.96
-Main.##WeaveSandBox#257.part2a
 </pre>
 
 
@@ -806,7 +822,7 @@ Main.##WeaveSandBox#257.part2a
         <div class="footer">
           <p>
             Published from <a href="jl_jmd_weave.jmd">jl_jmd_weave.jmd</a>
-            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.10 on 2021-11-05.
+            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.10 on 2021-11-06.
           </p>
         </div>
       </div>
