@@ -87,7 +87,7 @@ Process(`cmd /c cls`, ProcessExited(0))
 ### Julia packages
 Julia offers several packages that provide equation system solvers. The following found are:
 * [SymPy](https://github.com/JuliaPy/SymPy.jl);
-* [NLsolve](https://github.com/JuliaNLSolvers/NLsolve.jl)
+* [NLsolve](https://github.com/JuliaNLSolvers/NLsolve.jl).
 
 #### SymPy
 SymPy provides several functions to solve equations (singular or system): *factor*, *roots*, *real_roots*, *solve*, *nsolve*. *nsolve* will be showcased here:
